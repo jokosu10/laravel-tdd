@@ -27,8 +27,11 @@
         <env name="CACHE_DRIVER" value="array"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
-        <!-- Tambahkan dua baris di bawah ini untuk pengaturan database -->
-        <env name="DB_CONNECTION" value="sqlite"/>
-        <env name="DB_DATABASE" value=":memory:"/>
+        <!-- Setting for database testing -->
+        <env name="DB_HOST" value="localhost"/>
+        <env name="DB_DATABASE" value="laravel-tdd-fix"/>
+        <env name="DB_USERNAME" value="root"/>
+        <env name="DB_PASSWORD" value=""/>
+        <env name="DB_CONNECTION" value="mysql"/>
     </php>
 </phpunit>

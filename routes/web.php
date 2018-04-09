@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// add route and action (controller and method)
+Route::get('tasks', 'TasksController@index');
+Route::post('tasks', 'TasksController@store');
