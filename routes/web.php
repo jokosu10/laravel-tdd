@@ -18,3 +18,7 @@ Route::get('/', function () {
 // add route and action (controller and method)
 Route::get('tasks', 'TasksController@index');
 Route::post('tasks', 'TasksController@store');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
