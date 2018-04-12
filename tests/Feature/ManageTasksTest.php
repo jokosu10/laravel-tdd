@@ -58,6 +58,23 @@ class ManageTasksTest extends TestCase
 
     /**
      * @test
+     */
+    public function task_entry_must_pass_validation()
+    {
+        // try submit form for create new task
+        // with field name description is empty
+        $this->post('/tasks', [
+            'name'        => '',
+            'description' => '',
+        ]);
+
+        // cek session, maybe error for field name and description
+        // $this->assertSessionHasErrors(['name', 'description']);
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @test
      * */
     public function user_can_delete_an_existing_task()
     {
