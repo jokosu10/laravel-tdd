@@ -22,6 +22,7 @@
     </div>
     <div class="col-md-4">
         <h2>New Task</h2>
+        <form id="edit_task_5" action="{{ url('tasks/5') }}" method="post"></form>
         @if (count($errors) > 0)
             <div class="alert alert-danger">
                 <ul class="list-unstyled">
