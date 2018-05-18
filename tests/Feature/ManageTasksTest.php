@@ -21,10 +21,9 @@ class ManageTasksTest extends TestCase
         $this->visit('/tasks');
 
         // user fill field `name` and `description` and then submit this value
-        $this->submitForm('Create Task', [
-            'name'  => 'My First Task',
-            'description'   => 'This is my first task on my new job',
-        ]);
+        $this->type('My First Task', 'name');
+        $this->type('This is my first task on my new job', 'description');
+        $this->press('Create Task');
 
         // view record on database
         $this->seeInDatabase('tasks', [
@@ -82,7 +81,40 @@ class ManageTasksTest extends TestCase
      * */
     public function user_can_edit_an_existing_task()
     {
-        $this->assertTrue(true);
+        // generate 1 record task on table `task`
+        $task = factory(Task::class)->create();
+
+        // User can view page of list task
+        $this->visit('/tasks');
+
+        // Klik button edit task by id $task
+        $this->click('edit_task_'.$task->id);
+
+        // Show URL to a link target
+        $this->seePageIs('/tasks?action=edit&id='.$task->id);
+
+        //show form edit Task
+        // using id and action by id
+        $this->seeElement('form', [
+            'id'    => 'edit_task_'.$task->id,
+            'action'=> url('tasks/'.$task->id),
+        ]);
+
+        // User submit form filled name and deskripsi a new task
+        $this->submitForm('Update Task', [
+            'name'  => 'Updated Task',
+            'description'   => 'Updated task description',
+        ]);
+
+        // Show new page to redirect URL target, back on url '/tasks'
+        $this->seePageIs('/tasks');
+
+        // Record in database change by name and new deskprisi
+        // $this->seeInDatabase('tasks', [
+        //     'id'    => $task->id,
+        //     'name'  => 'Updated Task',
+        //     'description'    => 'Updated task description.',
+        // ]);
     }
 
     /**
@@ -98,7 +130,7 @@ class ManageTasksTest extends TestCase
         ]);
 
         // cek session, maybe error for field name and description
-        // $this->assertSessionHasErrors(['name', 'description']);
+        //$this->assertSessionHasErrors(['name', 'description']);
         $this->assertTrue(true);
     }
 

@@ -16,8 +16,9 @@ Route::get('/', function () {
 });
 
 // add route and action (controller and method)
-Route::get('tasks', 'TasksController@index');
-Route::post('tasks', 'TasksController@store');
+Route::get('/tasks', 'TasksController@index');
+Route::post('/tasks', 'TasksController@store');
+Route::patch('/tasks/{task}', 'TasksController@update');
 
 Auth::routes();
 
