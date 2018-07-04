@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class TasksController extends Controller
 {
+    /**
+     * function for view index task list
+     *
+     * @return view
+     */
     public function index()
     {
         $tasks = Task::all();
@@ -19,6 +24,11 @@ class TasksController extends Controller
         return view('tasks.index', compact('tasks', 'editableTask'));
     }
 
+    /**
+     * function for store new task
+     *
+     * @return back view
+     */
     public function store()
     {
         request()->validate([
@@ -31,6 +41,11 @@ class TasksController extends Controller
         return back();
     }
 
+    /**
+     * function for update task by object
+     *
+     * @return back view
+     */
     public function update(Task $task)
     {
         $taskData = request()->validate([
@@ -39,6 +54,18 @@ class TasksController extends Controller
         ]);
 
         $task->update($taskData);
+
+        return redirect('/tasks');
+    }
+
+    /**
+     * function for delete task by object
+     *
+     * @return back view
+     */
+    public function destroy(Task $task)
+    {
+        $task->delete();
 
         return redirect('/tasks');
     }
